@@ -1,30 +1,30 @@
 /*
- * Copyright (C) 2010-2017   Christopher C. Hulbert
- *
+ * Copyright (c) 2015-2023, The matio contributors
+ * Copyright (c) 2010-2014, Christopher C. Hulbert
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *    1. Redistributions of source code must retain the above copyright notice,
- *       this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *    list of conditions and the following disclaimer.
  *
- *    2. Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY CHRISTOPHER C. HULBERT ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL CHRISTOPHER C. HULBERT OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 #ifndef MATIO_PUBCONF_H
 #define MATIO_PUBCONF_H 1
 
@@ -35,13 +35,13 @@
 #define MATIO_MINOR_VERSION 5
 
 /* Matio release level number */
-#define MATIO_RELEASE_LEVEL 10
+#define MATIO_RELEASE_LEVEL 24
 
 /* Matio version number */
-#define MATIO_VERSION 1510
+#define MATIO_VERSION 1524
 
 /* Matio version string */
-#define MATIO_VERSION_STR "1.5.10"
+#define MATIO_VERSION_STR "1.5.24"
 
 /* Default file format */
 #define MAT_FT_DEFAULT MAT_FT_MAT5
@@ -119,39 +119,42 @@
 #endif
 
 #if MATIO_HAVE_INTTYPES_H
-#   include <inttypes.h>
+#include <inttypes.h>
 #endif
 
 #if MATIO_HAVE_STDINT_H
-#   include <stdint.h>
+#include <stdint.h>
+#else
+#include "stdint_msvc.h"
+#define MATIO_HAVE_STDINT_H 1
 #endif
 
 #ifdef _mat_int64_t
-    typedef _mat_int64_t mat_int64_t;
+typedef _mat_int64_t mat_int64_t;
 #endif
 #ifdef _mat_uint64_t
-    typedef _mat_uint64_t mat_uint64_t;
+typedef _mat_uint64_t mat_uint64_t;
 #endif
 #ifdef _mat_int32_t
-    typedef _mat_int32_t mat_int32_t;
+typedef _mat_int32_t mat_int32_t;
 #endif
 #ifdef _mat_uint32_t
-    typedef _mat_uint32_t mat_uint32_t;
+typedef _mat_uint32_t mat_uint32_t;
 #endif
 #ifdef _mat_int16_t
-    typedef _mat_int16_t mat_int16_t;
+typedef _mat_int16_t mat_int16_t;
 #endif
 #ifdef _mat_uint16_t
-    typedef _mat_uint16_t mat_uint16_t;
+typedef _mat_uint16_t mat_uint16_t;
 #endif
 #ifdef _mat_int8_t
-    typedef _mat_int8_t mat_int8_t;
+typedef _mat_int8_t mat_int8_t;
 #endif
 #ifdef _mat_uint8_t
-    typedef _mat_uint8_t mat_uint8_t;
+typedef _mat_uint8_t mat_uint8_t;
 #endif
 
-/* 
+/*
   The following macros handle noreturn attributes according to the latest
   C11/C++11 standard with fallback to the MSVC extension if using an older
   compiler.
@@ -166,5 +169,14 @@
 #else
 #define MATIO_NORETURN
 #endif
+
+/*
+  The following macros handle format attributes for type-checks against a
+  format string.
+*/
+
+#define MATIO_FORMATATTR_PRINTF1
+#define MATIO_FORMATATTR_PRINTF2
+#define MATIO_FORMATATTR_VPRINTF
 
 #endif /* MATIO_PUBCONF_H */
