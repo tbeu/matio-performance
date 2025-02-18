@@ -73,6 +73,8 @@ static void ReadMatFileMatio(const char* file, bool bInfoOnly)
 
 int main(int argc, char *argv[])
 {
+	Mat_LogInit("matioPerformance");
+
 	string pathToFiles = "..\\data\\";
 	string fileExtension = "*.mat";
 	WIN32_FIND_DATA search_data;
